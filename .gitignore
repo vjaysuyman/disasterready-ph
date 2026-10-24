@@ -1,0 +1,16 @@
+# Environment variables (never commit these)
+.env
+
+# Setup script (contains credentials)
+database/setup_admin.php
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
