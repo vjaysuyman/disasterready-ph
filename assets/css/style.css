@@ -1398,3 +1398,279 @@ tbody tr:hover {
         width: 100%;
     }
 }
+
+/* =========================================
+   Mobile Sidebar Fix (Hamburger)
+   ========================================= */
+
+/* Sa desktop, normal ang sidebar */
+.sidebar {
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Kung mobile screen na */
+@media (max-width: 900px) {
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        transform: translateX(-100%); /* Itago sa wala */
+        z-index: 9999;
+    }
+
+    .sidebar.active {
+        transform: translateX(0); /* Ipakita kung gi-click */
+        box-shadow: var(--shadow-lg);
+    }
+
+    .main-content {
+        margin-left: 0 !important; /* I-full width ang content */
+    }
+
+    .top-navbar {
+        justify-content: space-between; /* Ibutang ang hamburger sa wala */
+    }
+
+    #menu-toggle {
+        display: block !important; /* Ipakita ang hamburger sa mobile */
+    }
+}
+
+/* =========================================
+   OVERRIDE: Admin Mobile Sidebar Fix
+   ========================================= */
+
+/* Sa desktop, tagoan ang hamburger */
+.menu-toggle {
+    display: none !important;
+}
+
+@media (max-width: 900px) {
+    /* 1. Ayuhon ang layout container */
+    .admin-layout {
+        flex-direction: column !important;
+    }
+
+    /* 2. I-fixed ang sidebar ug tagoan sa wala */
+    .sidebar {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        width: 260px !important;
+        height: 100vh !important;
+        transform: translateX(-100%) !important;
+        z-index: 9999 !important;
+        transition: transform 0.3s ease-in-out !important;
+        flex-direction: column !important; /* Pabalikon sa vertical */
+        border-right: 1px solid var(--border) !important;
+        border-bottom: none !important;
+    }
+
+    /* 3. Ipakita ang sidebar kung naay .active class */
+    .sidebar.active {
+        transform: translateX(0) !important;
+        box-shadow: var(--shadow-lg) !important;
+    }
+
+    /* 4. Ibalik ang mga links sa sidebar ngadto sa porma nga tukog (vertical) */
+    .sidebar-nav {
+        flex-direction: column !important;
+        overflow-x: hidden !important;
+        padding: 1rem 0.75rem !important;
+    }
+
+    .sidebar-nav a {
+        border-left: 4px solid transparent !important;
+        border-bottom: none !important;
+        padding: 0.8rem 1rem !important;
+        white-space: normal !important;
+    }
+
+    .sidebar-nav a.active {
+        border-left-color: var(--primary) !important;
+        border-bottom-color: transparent !important;
+    }
+
+    /* 5. I-full width ang content */
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+
+    /* 6. Ipakita ang hamburger sa top navbar */
+    .menu-toggle {
+        display: block !important;
+    }
+    
+    .top-navbar {
+        justify-content: space-between !important;
+        padding: 0.9rem 1rem !important;
+    }
+}
+
+/* =========================================
+   OVERRIDE: Resident Mobile UI Fix
+   ========================================= */
+
+@media (max-width: 768px) {
+    /* 1. Ayuhon ang Navigation Bar */
+    .navbar {
+        flex-direction: column !important;
+        padding: 1rem !important;
+        gap: 1rem !important;
+        align-items: center !important;
+    }
+
+    .nav-brand {
+        margin-bottom: 0.5rem;
+    }
+
+    .nav-links {
+        flex-direction: row !important; /* Ibutang sa linya-linya */
+        flex-wrap: wrap !important; /* Kung mapuno, mobalhin sa sunod nga linya */
+        justify-content: center !important;
+        gap: 0.8rem !important;
+        width: 100%;
+    }
+
+    .nav-links span {
+        width: 100%;
+        text-align: center;
+        margin-top: 0.5rem;
+        padding: 0 !important;
+    }
+    
+    .nav-links a.btn-logout {
+        width: auto;
+        padding: 0.5rem 1rem !important;
+    }
+
+    /* 2. Ayuhon ang Hero Banner (ang asul nga box) */
+    .hero {
+        padding: 2rem 1rem !important;
+        text-align: center !important;
+        flex-direction: column !important; /* Pabalikon sa vertical */
+    }
+
+    .hero h1 {
+        font-size: 1.8rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .hero p {
+        font-size: 1rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+
+    /* Ayuhon ang "+ Report Emergency" button sa Hero */
+    .hero a.btn-primary, 
+    .hero .btn-primary {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 1rem !important;
+        display: block !important;
+        box-sizing: border-box !important;
+    }
+    
+    .hero > div {
+        width: 100%;
+    }
+
+    /* 3. Ayuhon ang Charts/Grid layout */
+    .charts-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    /* 4. Ayuhon ang AI Chat Box */
+    #chat-box {
+        padding: 1rem !important;
+    }
+    
+    /* Ayuhon ang AI Input ug Send button */
+    .chart-card > div:last-child {
+        flex-direction: column !important;
+    }
+    
+    .chart-card #ai-btn {
+        width: 100% !important;
+        margin-top: 0.5rem !important;
+    }
+}
+
+/* =========================================
+   RESIDENT MOBILE NAVBAR (Hamburger Toggle)
+   ========================================= */
+
+/* Itago ang hamburger sa desktop */
+.resident-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    /* I-flex ang navbar horizontally para magtapad ang brand ug hamburger */
+    .navbar {
+        flex-direction: row !important; 
+        justify-content: space-between !important;
+        padding: 1rem !important;
+        align-items: center !important;
+    }
+
+    /* Ipakita ang hamburger */
+    .resident-menu-toggle {
+        display: block !important;
+    }
+
+    /* Tagoan ang mga links by default */
+    .nav-links {
+        display: none !important;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--surface);
+        flex-direction: column !important;
+        padding: 1rem !important;
+        box-shadow: var(--shadow-md) !important;
+        border-bottom: 1px solid var(--border);
+        z-index: 999;
+    }
+
+    /* Ipakita ang mga links kung naay .active class */
+    .nav-links.active {
+        display: flex !important;
+    }
+    
+    /* Ayuhon ang span ug logout para mo-full width */
+    .nav-links span {
+        margin: 0.5rem 0 !important;
+    }
+
+    .nav-links a.btn-logout {
+        width: 100%;
+        text-align: center;
+        margin-top: 0.5rem;
+    }
+
+    /* Hero Fix gikan sa una */
+    .hero {
+        padding: 2rem 1rem !important;
+        text-align: center !important;
+        flex-direction: column !important; 
+    }
+
+    .hero a.btn-primary, 
+    .hero .btn-primary {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 1rem !important;
+        display: block !important;
+        box-sizing: border-box !important;
+    }
+}
