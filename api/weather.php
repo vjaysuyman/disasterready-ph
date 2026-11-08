@@ -23,5 +23,10 @@ if ($httpcode === 200 && $response) {
     echo $response;
 } else {
     http_response_code(500);
-    echo json_encode(['error' => 'Failed to fetch weather data.']);
+    echo json_encode([
+        'error' => 'Failed to fetch weather data.',
+        'http_code' => $httpcode,
+        'curl_error' => curl_error($ch),
+        'response' => $response
+    ]);
 }
