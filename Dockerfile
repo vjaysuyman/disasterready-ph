@@ -1,11 +1,13 @@
-# Gamita ang PHP 8.2 nga adunay Apache web server
 FROM php:8.2-apache
 
-# I-enable ang PDO MySQL ug cURL extensions (Para sa Database ug Weather API)
+# 1. I-install ang system dependency para sa cURL
+RUN apt-get update && apt-get install -y libcurl4-openssl-dev
+
+# 2. I-install ang PHP extensions (pdo, pdo_mysql, ug curl)
 RUN docker-php-ext-install pdo pdo_mysql curl
 
-# I-copy ang tanan nimong code ngadto sa web server directory
+# 3. Kopyaha ang code
 COPY . /var/www/html/
 
-# I-set ang working directory
+# 4. Set working directory
 WORKDIR /var/www/html
