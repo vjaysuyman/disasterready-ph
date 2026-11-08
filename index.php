@@ -5,9 +5,9 @@ require_once 'includes/auth.php';
 
 if (is_logged_in()) {
     if (is_admin()) {
-        header('Location: /disasterready/admin/dashboard.php');
+        header('Location: /admin/dashboard.php');
     } else {
-        header('Location: /disasterready/resident/dashboard.php');
+        header('Location: /resident/dashboard.php');
     }
     exit;
 }
@@ -21,8 +21,8 @@ include 'includes/header.php';
     <p>Your centralized platform for weather updates, earthquake monitoring, and emergency reporting.</p>
 
     <div class="hero-buttons">
-        <a href="/disasterready/login.php" class="btn-primary">Log In</a>
-        <a href="/disasterready/register.php" class="btn-secondary">Register as Resident</a>
+        <a href="/login.php" class="btn-primary">Log In</a>
+        <a href="/register.php" class="btn-secondary">Register as Resident</a>
     </div>
 
     <ul class="trust-badges">
@@ -212,7 +212,7 @@ include 'includes/header.php';
     <h2>Be ready before disaster strikes</h2>
     <p>Join DisasterReady PH today and help keep your community safe.</p>
 
-    <a href="/disasterready/register.php" class="btn-primary">
+    <a href="/register.php" class="btn-primary">
         Get Started
     </a>
 </div>

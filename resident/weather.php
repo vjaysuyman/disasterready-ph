@@ -47,7 +47,7 @@ function getWeatherInfo(code) {
 }
 
 // Kani nga endpoint kay mo-fetch sa weather.php API proxy
-fetch('/disasterready/api/weather.php')
+fetch('/api/weather.php')
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('weather-container');

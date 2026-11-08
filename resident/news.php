@@ -41,7 +41,7 @@ include '../includes/header.php';
 
 <script>
 // Fetch News from Currents API
-fetch('/disasterready/api/news.php')
+fetch('/api/news.php')
     .then(res => res.json())
     .then(data => {
         const container = document.getElementById('news-feed');

@@ -4,7 +4,7 @@ require_once 'includes/auth.php';
 require_once 'config/database.php';
 
 if (is_logged_in()) {
-    header('Location: /disasterready/index.php');
+    header('Location: /index.php');
     exit;
 }
 
@@ -57,7 +57,7 @@ include 'includes/header.php';
         <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>
     <?php if ($success): ?>
-        <div class="alert alert-success"><?= htmlspecialchars($success) ?> <a href="/disasterready/login.php">Login here</a></div>
+        <div class="alert alert-success"><?= htmlspecialchars($success) ?> <a href="/login.php">Login here</a></div>
     <?php endif; ?>
 
     <form method="POST" action="">
@@ -82,7 +82,7 @@ include 'includes/header.php';
         
         <button type="submit" class="btn-primary">Register</button>
     </form>
-    <p>Already have an account? <a href="/disasterready/login.php">Log in here</a></p>
+    <p>Already have an account? <a href="/login.php">Log in here</a></p>
 </div>
 
 <?php include 'includes/footer.php'; ?>

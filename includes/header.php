@@ -12,7 +12,7 @@ require_once __DIR__ . '/auth.php';
     <title>DisasterReady PH</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Gikuha ang /disasterready/ diri -->
+    <!-- Gikuha ang / diri -->
     <link rel="stylesheet" href="/assets/css/style.css">
 
     <!-- Leaflet CSS & JS for Maps -->

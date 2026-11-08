@@ -5,7 +5,7 @@ require_once 'config/database.php';
 
 // Kung naka-login na, i-redirect sa ilang dashboard
 if (is_logged_in()) {
-    header('Location: ' . (is_admin() ? '/disasterready/admin/dashboard.php' : '/disasterready/resident/dashboard.php'));
+    header('Location: ' . (is_admin() ? '/admin/dashboard.php' : '/resident/dashboard.php'));
     exit;
 }
 
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Regenerate session ID for security
             session_regenerate_id(true);
 
-            header('Location: ' . ($user['role'] === 'admin' ? '/disasterready/admin/dashboard.php' : '/disasterready/resident/dashboard.php'));
+            header('Location: ' . ($user['role'] === 'admin' ? '/admin/dashboard.php' : '/resident/dashboard.php'));
             exit;
         } else {
             $error = "Invalid email or password.";
@@ -65,7 +65,7 @@ include 'includes/header.php';
         
         <button type="submit" class="btn-primary">Log In</button>
     </form>
-    <p>Don't have an account? <a href="/disasterready/register.php">Register here</a></p>
+    <p>Don't have an account? <a href="/register.php">Register here</a></p>
 </div>
 
 <?php include 'includes/footer.php'; ?>

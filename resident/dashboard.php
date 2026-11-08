@@ -15,7 +15,7 @@ include '../includes/header.php';
         <p style="color: #cbd5e1; margin: 0; font-size: 1.1rem;">Stay updated with real-time disaster information and AI guidance.</p>
     </div>
     <div>
-        <a href="/disasterready/resident/report_create.php" class="btn-primary" style="background: var(--accent); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none; display: inline-block;">+ Report Emergency</a>
+        <a href="/resident/report_create.php" class="btn-primary" style="background: var(--accent); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none; display: inline-block;">+ Report Emergency</a>
     </div>
 </div>
 
@@ -92,7 +92,7 @@ include '../includes/header.php';
 // ==========================================
 // 1. Fetch Weather
 // ==========================================
-fetch('/disasterready/api/weather.php')
+fetch('/api/weather.php')
     .then(res => res.json())
     .then(data => {
         const temp = data.current.temperature_2m;
@@ -116,7 +116,7 @@ fetch('/disasterready/api/weather.php')
 // ==========================================
 // 2. Fetch Earthquakes
 // ==========================================
-fetch('/disasterready/api/earthquake.php')
+fetch('/api/earthquake.php')
     .then(res => res.json())
     .then(data => {
         const features = data.features;
@@ -183,7 +183,7 @@ document.getElementById('ai-btn').addEventListener('click', function() {
     document.getElementById('ai-btn').disabled = true;
 
     // Ilisan ang URL sa fetch
-    fetch('/disasterready/api/ai.php', {
+    fetch('/api/ai.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: input })
