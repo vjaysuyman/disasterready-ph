@@ -1,7 +1,9 @@
 FROM php:8.2-apache
 
-# 1. I-install ang system dependency para sa cURL
-RUN apt-get update && apt-get install -y libcurl4-openssl-dev
+# 1. I-install ang system libraries para sa cURL ug SSL certificates
+RUN apt-get update && apt-get install -y \
+    libcurl4-openssl-dev \
+    ca-certificates
 
 # 2. I-install ang PHP extensions (pdo, pdo_mysql, ug curl)
 RUN docker-php-ext-install pdo pdo_mysql curl
