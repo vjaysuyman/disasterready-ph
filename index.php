@@ -1,5 +1,6 @@
-
 <?php
+ob_start(); // Kini maoy mopugong sa warning nga "headers already sent"
+
 // index.php
 require_once 'includes/auth.php';
 
