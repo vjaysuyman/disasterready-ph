@@ -1,15 +1,16 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // api/weather.php
 header('Content-Type: application/json');
 
-// Coordinates para sa Manila (Pwede nimo usbon)
 $lat = 14.5995;
 $lon = 120.9842;
 
-// Open-Meteo API endpoint
 $url = "https://api.open-meteo.com/v1/forecast?latitude={$lat}&longitude={$lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FManila";
 
-// Pag-fetch gamit ang cURL
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
