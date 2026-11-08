@@ -2,12 +2,6 @@
 -- DisasterReady PH: Database Schema
 -- Run this in phpMyAdmin or via MySQL CLI
 
-CREATE DATABASE IF NOT EXISTS disasterready_ph
-CHARACTER SET utf8mb4
-COLLATE utf8mb4_unicode_ci;
-
-USE disasterready_ph;
-
 -- ============================================================
 -- TABLE: users
 -- Stores both residents and admins
