@@ -11,7 +11,7 @@ include '../includes/header.php';
 <!-- Hero Banner -->
 <div class="hero" style="padding: 3rem 2rem; margin-bottom: 2rem; text-align: left; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);">
     <div>
-        <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem; color: white;">Hello, <?= htmlspecialchars($_SESSION['full_name']) ?>! </h1>
+        <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem; color: white;">Hello, <?= htmlspecialchars($_SESSION['full_name']) ?>! 👋</h1>
         <p style="color: #cbd5e1; margin: 0; font-size: 1.1rem;">Stay updated with real-time disaster information and AI guidance.</p>
     </div>
     <div>
@@ -24,7 +24,7 @@ include '../includes/header.php';
     
     <!-- Weather Card -->
     <div class="chart-card" style="padding: 2rem; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-        <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.2rem;"> Live Weather (Manila)</h3>
+        <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.2rem;">🌤️ Live Weather (Manila)</h3>
         <div id="weather-data" style="width: 100%;">
             <p style="color: var(--text-muted);">Loading weather data...</p>
         </div>
@@ -32,7 +32,7 @@ include '../includes/header.php';
 
     <!-- Earthquake Card -->
     <div class="chart-card" style="padding: 2rem;">
-        <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.2rem;"> Recent Earthquakes</h3>
+        <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.2rem;">🌋 Recent Earthquakes</h3>
         <div id="earthquake-data" style="max-height: 250px; overflow-y: auto; padding-right: 0.5rem;">
             <p style="color: var(--text-muted); text-align: center;">Loading earthquake data...</p>
         </div>
@@ -69,9 +69,8 @@ include '../includes/header.php';
 
 <!-- Latest Announcements -->
 <div class="chart-card" style="padding: 2rem; margin-top: 1.5rem;">
-    <h3 style="color: var(--primary); font-size: 1.2rem; margin-bottom: 1rem;"> Latest Announcements</h3>
+    <h3 style="color: var(--primary); font-size: 1.2rem; margin-bottom: 1rem;">📢 Latest Announcements</h3>
     <?php
-    // Kuhaon ang pinakabag-o nga announcements
     $latestAnn = $pdo->query("SELECT * FROM announcements WHERE is_published = 1 ORDER BY created_at DESC LIMIT 3")->fetchAll();
     ?>
     <?php if (empty($latestAnn)): ?>
@@ -130,10 +129,9 @@ fetch('/api/earthquake.php')
                 const place = eq.properties.place;
                 const time = new Date(eq.properties.time).toLocaleString();
                 
-                // Color coding based on magnitude
-                let magColor = '#10b981'; // Green for low
-                if (mag >= 5.0) magColor = 'var(--accent)'; // Red for high
-                else if (mag >= 4.0) magColor = '#f59e0b'; // Orange for medium
+                let magColor = '#10b981';
+                if (mag >= 5.0) magColor = 'var(--accent)';
+                else if (mag >= 4.0) magColor = '#f59e0b';
 
                 html += `
                     <div style="border-bottom: 1px solid var(--border); padding: 1rem 0; display: flex; gap: 1rem; align-items: center;">
@@ -163,14 +161,12 @@ document.getElementById('ai-btn').addEventListener('click', function() {
 
     const chatBox = document.getElementById('chat-box');
     
-    // User Message Style
     chatBox.innerHTML += `
         <div style="background: var(--primary); color: white; padding: 1rem; border-radius: 12px 0 12px 12px; max-width: 80%; align-self: flex-end; margin-left: auto;">
             <p style="font-size: 0.95rem;">${input}</p>
         </div>
     `;
     
-    // Loading Message
     chatBox.innerHTML += `
         <div id="ai-loading" style="color: var(--text-muted); font-size: 0.9rem; font-style: italic;">
             AI is typing...
@@ -178,11 +174,9 @@ document.getElementById('ai-btn').addEventListener('click', function() {
     `;
     
     chatBox.scrollTop = chatBox.scrollHeight;
-    
     document.getElementById('ai-input').value = '';
     document.getElementById('ai-btn').disabled = true;
 
-    // Ilisan ang URL sa fetch
     fetch('/api/ai.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -193,7 +187,6 @@ document.getElementById('ai-btn').addEventListener('click', function() {
         const loadingEl = document.getElementById('ai-loading');
         if (loadingEl) loadingEl.remove();
         
-        // Groq/OpenAI format: data.choices[0].message.content
         const reply = data.choices[0].message.content;
         const formattedReply = reply.replace(/\n/g, '<br>');
         
@@ -208,7 +201,7 @@ document.getElementById('ai-btn').addEventListener('click', function() {
     })
     .catch(err => {
         const loadingEl = document.getElementById('ai-loading');
-        if (loadingEl) loadingEl.remove(); // Check kung naa ba ang element
+        if (loadingEl) loadingEl.remove();
         chatBox.innerHTML += `<p style="color: red; font-size: 0.9rem;">AI is temporarily unavailable. Please try again in a few moments.</p>`;
         document.getElementById('ai-btn').disabled = false;
     });

@@ -4,26 +4,23 @@ header('Content-Type: application/json');
 
 $lat = 14.5995;
 $lon = 120.9842;
-$apiKey = $_ENV['OPENWEATHER_API_KEY'] ?? '';
-
-if (empty($apiKey)) {
-    http_response_code(500);
-    echo json_encode(['error' => 'API key not configured.']);
-    exit;
-}
 
 // Cache file path
 $cacheFile = __DIR__ . '/weather_cache.json';
-$cacheTime = 1800; // 30 minutes
+$cacheTime = 1800; // 30 minutos (makatabang para dili maabot ang limit)
 
-// 1. Susiha kung naay cached data
+// 1. Susiha kung naay cached data ug wala pa ma-expire
 if (file_exists($cacheFile) && (time() - filemtime($cacheFile)) < $cacheTime) {
-    echo file_get_contents($cacheFile);
-    exit;
+    $cachedData = file_get_contents($cacheFile);
+    $data = json_decode($cachedData, true);
+    if (isset($data['current'])) {
+        echo $cachedData;
+        exit;
+    }
 }
 
-// 2. Fetch sa OpenWeatherMap API
-$url = "https://api.openweathermap.org/data/2.5/weather?lat={$lat}&lon={$lon}&appid={$apiKey}&units=metric";
+// 2. Fetch sa Open-Meteo API
+$url = "https://api.open-meteo.com/v1/forecast?latitude={$lat}&longitude={$lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Asia%2FManila";
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
@@ -34,13 +31,31 @@ $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
 if ($httpcode === 200 && $response) {
+    // I-save sa cache aron malikayan ang 429 sa sunod
     file_put_contents($cacheFile, $response);
     echo $response;
 } else {
-    // Fallback data kung mag-error
-    echo json_encode([
-        'main' => ['temp' => 'N/A', 'humidity' => 'N/A'],
-        'wind' => ['speed' => 'N/A'],
-        'weather' => [['description' => 'Unavailable', 'icon' => '01d']]
-    ]);
+    // 3. Fallback data kung maabot ang limit (429) o mag-error
+    $fallbackData = [
+        'current' => [
+            'temperature_2m' => 'N/A',
+            'relative_humidity_2m' => 'N/A',
+            'weather_code' => 0,
+            'wind_speed_10m' => 'N/A'
+        ],
+        'daily' => [
+            'time' => [date('Y-m-d')],
+            'weather_code' => [0],
+            'temperature_2m_max' => ['N/A'],
+            'temperature_2m_min' => ['N/A']
+        ],
+        'error_message' => 'Weather data temporarily unavailable (API limit). Showing fallback.'
+    ];
+    
+    // Kung naay daan nga cache, mas maayo gamiton to nato imbes fallback
+    if (file_exists($cacheFile)) {
+        echo file_get_contents($cacheFile);
+    } else {
+        echo json_encode($fallbackData);
+    }
 }
