@@ -10,7 +10,7 @@ include '../includes/header.php';
 
 <div class="hero" style="padding: 2rem; margin-bottom: 2rem; text-align: left;">
     <h1 style="font-size: 1.8rem; margin-bottom: 0.5rem; color: white;">🌤️ Weather Forecast</h1>
-    <p style="color: #cbd5e1; margin: 0;">Live data from Open-Meteo API.</p>
+    <p style="color: #cbd5e1; margin: 0;">Live data from Open-Meteo API for Iligan City.</p>
 </div>
 
 <div id="weather-container" style="background: var(--surface); padding: 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--border);">
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let html = `
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
                     <div>
-                        <h2 style="color: var(--primary); margin-bottom: 0.25rem;">Current Weather (Manila)</h2>
+                        <h2 style="color: var(--primary); margin-bottom: 0.25rem;">Current Weather (Iligan City)</h2>
                         <p style="color: var(--text-muted);">${currentInfo.desc}</p>
                     </div>
                     <div style="display: flex; align-items: center; gap: 1.5rem;">

@@ -24,7 +24,7 @@ include '../includes/header.php';
     
     <!-- Weather Card -->
     <div class="chart-card" style="padding: 2rem; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-        <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.2rem;">🌤️ Live Weather (Manila)</h3>
+        <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.2rem;">🌤️ Live Weather (Iligan City)</h3>
         <div id="weather-data" style="width: 100%;">
             <p style="color: var(--text-muted);">Loading weather data...</p>
         </div>
